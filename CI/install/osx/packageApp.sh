@@ -16,7 +16,7 @@ cp ../CI/install/osx/Info.plist ./OBS.app/Contents
 -s ./OBS.app/Contents/MacOS \
 -s /usr/local/opt/mbedtls/lib/ \
 -x ./OBS.app/Contents/Plugins/coreaudio-encoder.so \
--x ./OBS.app/Contents/Plugins/decklink-ouput-ui.so \
+-x ./OBS.app/Contents/Plugins/decklink-output-ui.so \
 -x ./OBS.app/Contents/Plugins/frontend-tools.so \
 -x ./OBS.app/Contents/Plugins/image-source.so \
 -x ./OBS.app/Contents/Plugins/linux-jack.so \
@@ -56,9 +56,9 @@ install_name_tool -change /usr/local/Cellar/qt/5.10.1/lib/QtCore.framework/Versi
 
 
 # decklink ui qt
-install_name_tool -change /usr/local/opt/qt/lib/QtGui.framework/Versions/5/QtGui @executable_path/../Frameworks/QtGui.framework/Versions/5/QtGui ./OBS.app/Contents/Plugins/decklink-ouput-ui.so
-install_name_tool -change /usr/local/opt/qt/lib/QtCore.framework/Versions/5/QtCore @executable_path/../Frameworks/QtCore.framework/Versions/5/QtCore ./OBS.app/Contents/Plugins/decklink-ouput-ui.so
-install_name_tool -change /usr/local/opt/qt/lib/QtWidgets.framework/Versions/5/QtWidgets @executable_path/../Frameworks/QtWidgets.framework/Versions/5/QtWidgets ./OBS.app/Contents/Plugins/decklink-ouput-ui.so
+install_name_tool -change /usr/local/opt/qt/lib/QtGui.framework/Versions/5/QtGui @executable_path/../Frameworks/QtGui.framework/Versions/5/QtGui ./OBS.app/Contents/Plugins/decklink-output-ui.so
+install_name_tool -change /usr/local/opt/qt/lib/QtCore.framework/Versions/5/QtCore @executable_path/../Frameworks/QtCore.framework/Versions/5/QtCore ./OBS.app/Contents/Plugins/decklink-output-ui.so
+install_name_tool -change /usr/local/opt/qt/lib/QtWidgets.framework/Versions/5/QtWidgets @executable_path/../Frameworks/QtWidgets.framework/Versions/5/QtWidgets ./OBS.app/Contents/Plugins/decklink-output-ui.so
 
 # frontend tools qt
 install_name_tool -change /usr/local/opt/qt/lib/QtGui.framework/Versions/5/QtGui @executable_path/../Frameworks/QtGui.framework/Versions/5/QtGui ./OBS.app/Contents/Plugins/frontend-tools.so
