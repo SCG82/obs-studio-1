@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 hr() {
   echo "───────────────────────────────────────────────────"
   echo $1
@@ -6,6 +8,9 @@ hr() {
 
 # Exit if something fails
 set -e
+
+start_ts=$(date +%s)
+start="$(date '+%Y-%m-%d %H:%M:%S')"
 
 # Generate file name variables
 export GIT_TAG=$(git describe --abbrev=0)
@@ -58,8 +63,8 @@ install_name_tool -change @rpath/Sparkle.framework/Versions/A/Sparkle @executabl
 
 # Copy Chromium embedded framework to app Frameworks directory
 hr "Copying Chromium Embedded Framework.framework"
-sudo mkdir -p OBS.app/Contents/Frameworks
-sudo cp -R ../../cef_binary_${CEF_BUILD_VERSION}_macosx64/Release/Chromium\ Embedded\ Framework.framework OBS.app/Contents/Frameworks/
+mkdir -p OBS.app/Contents/Frameworks
+cp -R ../../cef_binary_${CEF_BUILD_VERSION}_macosx64/Release/Chromium\ Embedded\ Framework.framework OBS.app/Contents/Frameworks/
 
 install_name_tool -change /usr/local/opt/qt/lib/QtGui.framework/Versions/5/QtGui @executable_path/../Frameworks/QtGui.framework/Versions/5/QtGui ./OBS.app/Contents/Plugins/obs-browser.so
 install_name_tool -change /usr/local/opt/qt/lib/QtCore.framework/Versions/5/QtCore @executable_path/../Frameworks/QtCore.framework/Versions/5/QtCore ./OBS.app/Contents/Plugins/obs-browser.so
@@ -95,5 +100,17 @@ cp ./OBS.dmg ./$FILENAME
 
 # Move to the folder that travis uses to upload artifacts from
 hr "Moving package to nightly folder for distribution"
-mkdir ../nightly
+mkdir -p ../nightly
 sudo mv ./$FILENAME ../nightly
+
+end=$(date '+%Y-%m-%d %H:%M:%S')
+end_ts=$(date +%s)
+runtime=$((end_ts-start_ts))
+hours=$((runtime / 3600))
+minutes=$(( (runtime % 3600) / 60 ))
+seconds=$(( (runtime % 3600) % 60 ))
+
+echo
+echo   "Start:           ${start}"
+echo   "End:             ${end}"
+printf "Elapsed:         (hh:mm:ss) %02d:%02d:%02d\n" ${hours} ${minutes} ${seconds}
