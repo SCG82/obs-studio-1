@@ -8166,6 +8166,12 @@ QAction *OBSBasic::AddDockWidget(QDockWidget *dock)
 	return action;
 }
 
+QAction *OBSBasic::AddDockWidget(QDockWidget *dock, Qt::DockWidgetArea *area)
+{
+	addDockWidget(*area, dock);
+	return AddDockWidget(dock);
+}
+
 OBSBasic *OBSBasic::Get()
 {
 	return reinterpret_cast<OBSBasic *>(App()->GetMainWindow());

@@ -828,6 +828,7 @@ public:
 	void CreateFiltersWindow(obs_source_t *source);
 
 	QAction *AddDockWidget(QDockWidget *dock);
+	QAction *AddDockWidget(QDockWidget *dock, Qt::DockWidgetArea *area);
 
 	static OBSBasic *Get();
 

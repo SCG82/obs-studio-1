@@ -295,6 +295,13 @@ void *obs_frontend_add_dock(void *dock)
 	return !!callbacks_valid() ? c->obs_frontend_add_dock(dock) : nullptr;
 }
 
+void *obs_frontend_add_positioned_dock(void *dock, void *area)
+{
+	return !!callbacks_valid()
+		       ? c->obs_frontend_add_positioned_dock(dock, area)
+		       : nullptr;
+}
+
 void obs_frontend_add_event_callback(obs_frontend_event_cb callback,
 				     void *private_data)
 {
